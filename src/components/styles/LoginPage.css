@@ -1,0 +1,102 @@
+.login-bg {
+  background: #0d407a;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+.login-header {
+  background: #13bb59;
+}
+.login-card {
+  border-top: 6px solid #2ecc71;
+}
+.login-footer {
+  background: transparent;
+}
+.banner{
+    background: linear-gradient(90deg, #3db54a 0%, #0c8a66 100%);
+    padding: 8px 15px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+.banner h1 {
+    margin: 0;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+.bubble {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  animation: float 10s infinite ease-in-out;
+  z-index: 1;
+}
+@keyframes float {
+  0% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(-50vh) translateX(10px); opacity: 0.8; }
+  100% { transform: translateY(-100vh) translateX(-10px); opacity: 0; }
+}
+.bubble:nth-child(4) { width: 80px; height: 80px; left: 10%; animation-delay: 0s; bottom: 10%; }
+.bubble:nth-child(5) { width: 50px; height: 50px; left: 20%; animation-delay: 2s; bottom: 20%; }
+.bubble:nth-child(6) { width: 100px; height: 100px; left: 30%; animation-delay: 4s; bottom: 15%; }
+.bubble:nth-child(7) { width: 60px; height: 60px; left: 40%; animation-delay: 1s; bottom: 25%; }
+.bubble:nth-child(8) { width: 70px; height: 70px; left: 50%; animation-delay: 3s; bottom: 18%; }
+.bubble:nth-child(9) { width: 90px; height: 90px; left: 60%; animation-delay: 5s; bottom: 12%; }
+.bubble:nth-child(10) { width: 40px; height: 40px; left: 70%; animation-delay: 2s; bottom: 22%; }
+
+/* Thêm cho layout sát nhau và chữ nhỏ lại */
+.login-main {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 300px;
+  padding: 0 0;
+}
+.login-left {
+  max-width: 400px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.login-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #2ecc71;
+  line-height: 1.1;
+}
+.login-title span {
+  color: #13a7c7;
+}
+.login-desc {
+  color: #fff;
+  font-size: 1rem;
+}
+.login-card {
+  width: 380px;
+  margin-left: 0;
+}
+.login-btn {
+  background: linear-gradient(to right, #2ecc71, #13a7c7);
+  padding: 0.35rem 0.25rem ;         /* Giảm padding cho nút nhỏ lại */
+  font-size: 1rem;           /* Nhỏ hơn text-lg */
+  transition: 
+    box-shadow 0.2s, 
+    transform 0.2s, 
+    opacity 0.2s;
+  box-shadow: 0 2px 8px rgba(10, 112, 54, 0.15);
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  box-shadow: 0 8px 24px 0 rgba(4, 53, 25, 0.25), 0 1.5px 8px 0 rgba(8, 108, 131, 0.15);
+  transform: translateY(-2px) scale(1);
+  opacity: 0.95;
+}
