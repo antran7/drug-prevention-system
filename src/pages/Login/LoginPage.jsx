@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../../components/styles/LoginPage.css";
 
 function LoginPage() {
@@ -9,14 +9,47 @@ function LoginPage() {
     keepLoggedIn: false,
   });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      navigate("/");
+    }
+  }, [navigate]);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
     let newErrors = {};
     if (!state.username) newErrors.username = "Username is required.";
     if (!state.password) newErrors.password = "Password is required.";
     setErrors(newErrors);
+
     if (Object.keys(newErrors).length === 0) {
-      console.log("Login", state);
+      try {
+        const response = await fetch(
+          "https://683b29ab43bb370a8674e73d.mockapi.io/users"
+        );
+        const users = await response.json();
+
+        const user = users.find(
+          (u) => u.username === state.username && u.password === state.password
+        );
+
+        if (user) {
+          if (state.keepLoggedIn) {
+            localStorage.setItem("user", JSON.stringify(user));
+          } else {
+            sessionStorage.setItem("user", JSON.stringify(user));
+          }
+          navigate("/");
+        } else {
+          setErrors({ general: "Invalid username or password." });
+        }
+      } catch (error) {
+        console.error("Login error:", error);
+        setErrors({ general: "An error occurred. Please try again." });
+      }
     }
   };
 
@@ -61,54 +94,59 @@ function LoginPage() {
             <p className="text-gray-600 mb-6">
               Login below to see all your courses.
             </p>
-            <div className="mb-4 input-group">
-              <label className="block text-xs mb-1 font-semibold">
-                Username
-                <span className="text-red-500 ml-1">*</span>
-              </label>
-              <input
-                type="text"
-                name="username"
-                value={state.username}
-                onChange={handleChange}
-                className={`w-full p-1 pl-2.5 border rounded bg-gray-100 focus:bg-white hover:bg-white focus:outline-none focus:ring-2 focus:ring-green-400 hover:border-green-400 ${
-                  errors.username ? "border-red-400" : ""
-                }`}
-                autoComplete="username"
-              />
-              {errors.username && (
-                <div className="text-red-500 text-xs mt-1">
-                  {errors.username}
-                </div>
-              )}
-            </div>
-            <div className="mb-6 input-group">
-              <label className="block text-xs mb-1 font-semibold">
-                Password
-                <span className="text-red-500 ml-1">*</span>
-              </label>
-              <input
-                type="password"
-                name="password"
-                value={state.password}
-                onChange={handleChange}
-                className={`w-full p-1 pl-2.5 border rounded bg-gray-100 focus:bg-white hover:bg-white focus:outline-none focus:ring-2 focus:ring-green-400 hover:border-green-400 ${
-                  errors.password ? "border-red-400" : ""
-                }`}
-                autoComplete="current-password"
-              />
-              {errors.password && (
-                <div className="text-red-500 text-xs mt-1">
-                  {errors.password}
-                </div>
-              )}
-            </div>
-            <button
-              onClick={handleLogin}
-              className="login-btn w-full text-white p-3 rounded font-semibold text-lg shadow-md hover:opacity-90 transition"
-            >
-              Login
-            </button>
+            {errors.general && (
+              <div className="text-red-500 text-xs mb-4">{errors.general}</div>
+            )}
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div className="mb-4 input-group">
+                <label className="block text-xs mb-1 font-semibold">
+                  Username
+                  <span className="text-red-500 ml-1">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="username"
+                  value={state.username}
+                  onChange={handleChange}
+                  className={`w-full p-1 pl-2.5 border rounded bg-gray-100 focus:bg-white hover:bg-white focus:outline-none focus:ring-2 focus:ring-green-400 hover:border-green-400 ${
+                    errors.username ? "border-red-400" : ""
+                  }`}
+                  autoComplete="username"
+                />
+                {errors.username && (
+                  <div className="text-red-500 text-xs mt-1">
+                    {errors.username}
+                  </div>
+                )}
+              </div>
+              <div className="mb-6 input-group">
+                <label className="block text-xs mb-1 font-semibold">
+                  Password
+                  <span className="text-red-500 ml-1">*</span>
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  value={state.password}
+                  onChange={handleChange}
+                  className={`w-full p-1 pl-2.5 border rounded bg-gray-100 focus:bg-white hover:bg-white focus:outline-none focus:ring-2 focus:ring-green-400 hover:border-green-400 ${
+                    errors.password ? "border-red-400" : ""
+                  }`}
+                  autoComplete="current-password"
+                />
+                {errors.password && (
+                  <div className="text-red-500 text-xs mt-1">
+                    {errors.password}
+                  </div>
+                )}
+              </div>
+              <button
+                type="submit"
+                className="login-btn w-full text-white p-3 rounded font-semibold text-lg shadow-md hover:opacity-90 transition"
+              >
+                Login
+              </button>
+            </form>
             <div className="flex justify-between items-center text-xs mt-4">
               <label className="flex items-center">
                 <input

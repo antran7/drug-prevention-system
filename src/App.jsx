@@ -8,6 +8,11 @@ import Home from "./pages/Home/Home";
 import LoginPage from "./pages/Login/LoginPage";
 import RegisterPage from "./pages/Register/RegisterPage";
 
+const ProtectedRoute = ({ children }) => {
+  const user = localStorage.getItem("user") || sessionStorage.getItem("user");
+  return user ? children : <Navigate to="/login" />;
+};
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,8 +20,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
-      }
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
   {
@@ -27,20 +36,14 @@ const router = createBrowserRouter([
     path: "/register",
     element: <RegisterPage />,
   },
-  // Them tương tự như này
-  // {
-  //   path: "login",
-  //   element: <Login />,
-  // }
-])
+]);
 
 function App() {
-
   return (
     <>
       <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
