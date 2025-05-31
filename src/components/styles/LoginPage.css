@@ -5,10 +5,10 @@
   overflow: hidden;
 }
 .login-header {
-  background: #13bb59;
+  background: #11f570;
 }
 .login-card {
-  border-top: 6px solid #2ecc71;
+  border-top: 6px solid #31c49a;
 }
 .login-footer {
   background: transparent;
@@ -79,14 +79,11 @@
   color: #fff;
   font-size: 1rem;
 }
-.login-card {
-  width: 380px;
-  margin-left: 0;
-}
+
 .login-btn {
   background: linear-gradient(to right, #2ecc71, #13a7c7);
-  padding: 0.35rem 0.25rem ;         /* Giảm padding cho nút nhỏ lại */
-  font-size: 1rem;           /* Nhỏ hơn text-lg */
+  padding: 0.35rem 0.25rem ;       
+  font-size: 1rem;           
   transition: 
     box-shadow 0.2s, 
     transform 0.2s, 
@@ -100,3 +97,21 @@
   transform: translateY(-2px) scale(1);
   opacity: 0.95;
 }
+.learn-text, .everywhere-text {
+  background: linear-gradient(90deg, #22c55e 0%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.login-underline {
+  width: 80px;
+  height: 5px;
+  background: linear-gradient(90deg, #22c55e 0%, #38bdf8 100%);
+  border-radius: 4px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+
+
