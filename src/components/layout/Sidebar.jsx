@@ -6,53 +6,54 @@ import {
     FaTools, FaCheckCircle, FaCode, FaSpinner, FaCommentDots, FaEye, FaChartBar,
     FaFileAlt, FaPaperPlane, FaUsers, FaFolder, FaQuestionCircle
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export default function Sidebar({ state }) {
     const groups = [
         {
             title: "Users",
             items: [
-                { icon: <FaUserCog />, label: "Role" },
-                { icon: <FaUser />, label: "User" },
-                { icon: <FaMapMarkerAlt />, label: "Location" },
-                { icon: <FaLayerGroup />, label: "Department" },
-                { icon: <FaHistory />, label: "Activity" },
-                { icon: <FaBell />, label: "Notification" },
-                { icon: <FaComments />, label: "Forum" },
-                { icon: <FaUsers />, label: "Collaboration Group" },
-                { icon: <FaThLarge />, label: "Module Group" },
-                { icon: <FaThLarge />, label: "Module" },
-                { icon: <FaDiceFive />, label: "Competency Category" },
-                { icon: <FaLayerGroup />, label: "Competencie" },
-                { icon: <FaUserCircle />, label: "Instructor" },
+                { icon: <FaUserCog />, label: "Role", to: "/role" },
+                { icon: <FaUser />, label: "User", to: "/user" },
+                { icon: <FaMapMarkerAlt />, label: "Location", to: "/location" },
+                { icon: <FaLayerGroup />, label: "Department", to: "/department" },
+                { icon: <FaHistory />, label: "Activity", to: "/activity" },
+                { icon: <FaBell />, label: "Notification", to: "/notification" },
+                { icon: <FaComments />, label: "Forum", to: "/forum" },
+                { icon: <FaUsers />, label: "Collaboration Group", to: "/collaboration-group" },
+                { icon: <FaThLarge />, label: "Module Group", to: "/module-group" },
+                { icon: <FaThLarge />, label: "Module", to: "/module" },
+                { icon: <FaDiceFive />, label: "Competency Category", to: "/competency-category" },
+                { icon: <FaLayerGroup />, label: "Competencie", to: "/competency" },
+                { icon: <FaUserCircle />, label: "Instructor", to: "/instructor" },
             ],
         },
         {
             title: "Courses",
             items: [
-                { icon: <FaTrophy />, label: "Achievement" },
-                { icon: <FaRoute />, label: "Learning Path" },
-                { icon: <FaBook />, label: "Course" },
-                { icon: <FaCertificate />, label: "Certification" },
-                { icon: <FaFolderOpen />, label: "Resource" },
-                { icon: <FaFolder />, label: "Syllabus" },
+                { icon: <FaTrophy />, label: "Achievement", to: "/achievement" },
+                { icon: <FaRoute />, label: "Learning Path", to: "/learning-path" },
+                { icon: <FaBook />, label: "Course", to: "/course" },
+                { icon: <FaCertificate />, label: "Certification", to: "/certification" },
+                { icon: <FaFolderOpen />, label: "Resource", to: "/resource" },
+                { icon: <FaFolder />, label: "Syllabus", to: "/syllabus" },
                 { icon: <FaStar />, label: "Rating" },
                 { icon: <FaListAlt />, label: "Enrollment" },
-                { icon: <FaGlobe />, label: "Global Resource" },
-                { icon: <FaParking />, label: "Training Program" },
-                { icon: <FaRobot />, label: "Chat bot" },
+                { icon: <FaGlobe />, label: "Global Resource", to: "/global-resource" },
+                { icon: <FaParking />, label: "Training Program", to: "/training-program" },
+                { icon: <FaRobot />, label: "Chat bot", to: "/chat-bot" },
             ],
         },
         {
             title: "Assessments",
             items: [
-                { icon: <FaFolder />, label: "Assessment Type" },
-                { icon: <FaTools />, label: "Tools" },
-                { icon: <FaCheckCircle />, label: "Assessment" },
-                { icon: <FaCode />, label: "Exercise" },
-                { icon: <FaSpinner />, label: "Programing Language" },
-                { icon: <FaCommentDots />, label: "Input Score" },
-                { icon: <FaEye />, label: "Grade Config" },
+                { icon: <FaFolder />, label: "Assessment Type", to: "/assessment-type" },
+                { icon: <FaTools />, label: "Tools", to: "/tools" },
+                { icon: <FaCheckCircle />, label: "Assessment", to: "/assessment" },
+                { icon: <FaCode />, label: "Exercise", to: "/exercise" },
+                { icon: <FaSpinner />, label: "Programing Language", to: "/programming-language" },
+                { icon: <FaCommentDots />, label: "Input Score", to: "/input-score" },
+                { icon: <FaEye />, label: "Grade Config", to: "/grade-config" },
             ],
         },
         {
@@ -66,19 +67,19 @@ export default function Sidebar({ state }) {
         {
             title: "Students",
             items: [
-                { icon: <FaCommentDots />, label: "Attendance" },
-                { icon: <FaUsers />, label: "Group" },
-                { icon: <FaUser />, label: "Student" },
-                { icon: <FaFolder />, label: "Team" },
-                { icon: <FaQuestionCircle />, label: "Quiz" },
-                { icon: <FaThLarge />, label: "Student Course" },
+                { icon: <FaCommentDots />, label: "Attendance", to: "/attendance" },
+                { icon: <FaUsers />, label: "Group", to: "/group" },
+                { icon: <FaUser />, label: "Student", to: "/student" },
+                { icon: <FaFolder />, label: "Team", to: "/team" },
+                { icon: <FaQuestionCircle />, label: "Quiz", to: "/quiz" },
+                { icon: <FaThLarge />, label: "Student Course", to: "/student-course" },
             ],
         },
         {
             title: "Feedbacks",
             items: [
-                { icon: <FaFileAlt />, label: "Progress management" },
-                { icon: <FaComments />, label: "Feedback" },
+                { icon: <FaFileAlt />, label: "Progress management", to: "/progress-management" },
+                { icon: <FaComments />, label: "Feedback", to: "/feedback" },
             ],
         },
     ];
@@ -95,13 +96,14 @@ export default function Sidebar({ state }) {
                         )}
                         <div className={`space-y-1 ${state === 1 ? 'flex flex-col items-center gap-2' : ''}`}>
                             {group.items.map((item, itemIndex) => (
-                                <div
+                                <Link
+                                    to={item.to}
                                     key={itemIndex}
                                     className={`hover:bg-[#0e3b57] rounded cursor-pointer ${state === 2 ? "flex items-center gap-3 px-4 py-2" : "flex flex-col items-center text-center w-full px-2"}`}
                                 >
                                     <div className="text-3xl">{item.icon}</div>
                                     <span className={`${state === 2 ? 'text-lg' : 'text-sm text-center leading-tight break-words'}`}>{item.label}</span>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                         <hr className="border-gray-700 my-2 mx-4" />
