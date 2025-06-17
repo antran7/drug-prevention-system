@@ -1,53 +1,53 @@
-import React, { useState } from 'react'
-import { Outlet } from 'react-router-dom'
-import Navbar from './Navbar'
-import Sidebar from './Sidebar'
-import Footer from './Footer'
-import ChatBubble from '../common/ChatBubble'
-
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import Navbar from './Navbar';
+import Sidebar from './Sidebar';
+import Footer from './Footer';
+import ChatBubble from '../common/ChatBubble';
 
 const Layout = () => {
-    const [sidebarState, setSidebarState] = useState(1); // 1 = mini, 2 = full, 3 = hidden
+  const [sidebarState, setSidebarState] = useState(1); // 1 = mini, 2 = full, 3 = hidden
 
-    const toggleSidebar = () => {
-        setSidebarState((prev) => (prev % 3) + 1);
-    };
+  const toggleSidebar = () => {
+    setSidebarState((prev) => (prev % 3) + 1);
+  };
 
-    const sidebarWidth = sidebarState === 1 ? 80 : sidebarState === 2 ? 256 : 0;
+  const sidebarWidth = sidebarState === 1 ? 80 : sidebarState === 2 ? 256 : 0;
 
-    return (
-        <>
-            <div className="fixed top-0 left-0 right-0 z-50">
-                <Navbar onToggle={toggleSidebar} />
-            </div>
+  return (
+    <>
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <Navbar onToggle={toggleSidebar} />
+      </div>
 
-            {/* Content area */}
-            <div className="flex flex-1 pt-16">
-                {/* Sidebar NẰM TRONG flow layout */}
-                {sidebarState !== 3 && (
-                    <div
-                        style={{ width: `${sidebarWidth}px` }}
-                        className="bg-white shadow flex-shrink-0"
-                    >
-                        <Sidebar state={sidebarState} />
-                    </div>
-                )}
+      {/* Content area */}
+      <div className="pt-16 flex">
+        {/* Sidebar */}
+        {sidebarState !== 3 && (
+          <div
+            style={{ width: `${sidebarWidth}px` }}
+            className="bg-white shadow fixed top-16 left-0 bottom-0 z-40 transition-all"
+          >
+            <Sidebar state={sidebarState} />
+          </div>
+        )}
 
-                {/* Main content */}
-                <div className="flex-1">
-                    <main className="p-6 space-y-6">
-                        <Outlet />
-                    </main>
-                </div>
-            </div>
+        {/* Main content */}
+        <div
+          className="flex-1 transition-all"
+          style={{ marginLeft: `${sidebarState !== 3 ? sidebarWidth : 0}px` }}
+        >
+          <main className="p-6 space-y-6 min-h-screen">
+            <Outlet />
+          </main>
+          <Footer />
+        </div>
+      </div>
 
-            {/* Footer */}
-            <Footer />
+      {/* Chat bubble */}
+      <ChatBubble />
+    </>
+  );
+};
 
-            {/* Chat bubble */}
-            <ChatBubble />
-        </>
-    )
-}
-
-export default Layout
+export default Layout;
