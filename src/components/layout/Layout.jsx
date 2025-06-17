@@ -7,19 +7,19 @@ import ChatBubble from '../ui/ChatBubble'
 
 
 const Layout = () => {
-    const [sidebarState, setSidebarState] = useState(1); // 1 = mini, 2 = full, 3 = hidden
+  const [sidebarState, setSidebarState] = useState(1); // 1 = mini, 2 = full, 3 = hidden
 
-    const toggleSidebar = () => {
-        setSidebarState((prev) => (prev % 3) + 1);
-    };
+  const toggleSidebar = () => {
+    setSidebarState((prev) => (prev % 3) + 1);
+  };
 
-    const sidebarWidth = sidebarState === 1 ? 80 : sidebarState === 2 ? 256 : 0;
+  const sidebarWidth = sidebarState === 1 ? 80 : sidebarState === 2 ? 256 : 0;
 
-    return (
-        <>
-            <div className="fixed top-0 left-0 right-0 z-50">
-                <Navbar onToggle={toggleSidebar} />
-            </div>
+  return (
+    <>
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <Navbar onToggle={toggleSidebar} />
+      </div>
 
             {/* Content area */}
             <div className="flex flex-1 pt-16">
@@ -39,13 +39,10 @@ const Layout = () => {
                 </main>
             </div>
 
-            {/* Footer */}
-            <Footer />
+      {/* Chat bubble */}
+      <ChatBubble />
+    </>
+  );
+};
 
-            {/* Chat bubble */}
-            <ChatBubble />
-        </>
-    )
-}
-
-export default Layout
+export default Layout;

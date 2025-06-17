@@ -9,6 +9,10 @@ import LoginPage from "./pages/Login/LoginPage";
 import RegisterPage from "./pages/Register/RegisterPage";
 import Course from "./pages/Courses/Course";
 
+import UserList from "./pages/User/UserList";
+import AddUser from "./pages/User/AddUser";
+import EditUser from "./pages/User/EditUser";
+
 const ProtectedRoute = ({ children }) => {
   const user = localStorage.getItem("user") || sessionStorage.getItem("user");
   return user ? children : <Navigate to="/login" />;
@@ -30,7 +34,31 @@ const router = createBrowserRouter([
       {
         path: '/course',
         element: <Course />,
-      }
+      },
+      {
+        path: "/users",
+        element: (
+          <ProtectedRoute>
+            <UserList />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/users/add",
+        element: (
+          <ProtectedRoute>
+            <AddUser />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/users/:id/edit",
+        element: (
+          <ProtectedRoute>
+            <EditUser />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
   {
@@ -44,11 +72,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

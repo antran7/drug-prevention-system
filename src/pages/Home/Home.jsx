@@ -15,7 +15,7 @@ const Home = () => {
         <WelcomeBanner />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatCard icon={<FaUsers />} label="Users" value="519" color="#99f6e4" />
+         <StatCard icon={<FaUsers />} label="Users" value="519" color="#99f6e4" link="/users" />
           <StatCard icon={<FaBook />} label="Courses" value="39" color="#bfdbfe" />
           <StatCard icon={<FaPuzzlePiece />} label="Modules" value="42" color="#bbf7d0" />
           <StatCard icon={<FaUserCheck />} label="Enrollments" value="18" color="#fde68a" />

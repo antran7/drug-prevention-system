@@ -1,11 +1,21 @@
-export default function StatCard({ icon, label, value, color }) {
-    return (
-        <div className="flex items-center gap-4 bg-white p-4 rounded-lg shadow">
-            <div className={`text-3xl rounded-full p-2`} style={{ backgroundColor: color }}>{icon}</div>
-            <div>
-                <div className="text-sm">{label}</div>
-                <div className="font-bold text-lg">{value}</div>
-            </div>
-        </div>
-    );
-}
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const StatCard = ({ icon, label, value, color, link }) => {
+  const content = (
+    <div
+      className="flex items-center p-4 bg-white rounded shadow hover:shadow-lg transition-all cursor-pointer"
+      style={{ backgroundColor: color }}
+    >
+      <div className="text-4xl mr-4">{icon}</div>
+      <div>
+        <div className="text-sm font-medium">{label}</div>
+        <div className="text-2xl font-bold">{value}</div>
+      </div>
+    </div>
+  );
+
+  return link ? <Link to={link}>{content}</Link> : content;
+};
+
+export default StatCard;
