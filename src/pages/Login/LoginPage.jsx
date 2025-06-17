@@ -28,7 +28,7 @@ function LoginPage() {
     if (Object.keys(newErrors).length === 0) {
       try {
         const response = await fetch(
-          "https://683b29ab43bb370a8674e73d.mockapi.io/users"
+          "https://684f8c28e7c42cfd179502d0.mockapi.io/api/user"
         );
         const users = await response.json();
 

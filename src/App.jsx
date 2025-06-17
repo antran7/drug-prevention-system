@@ -7,6 +7,7 @@ import Layout from "./components/layout/Layout";
 import Home from "./pages/Home/Home";
 import LoginPage from "./pages/Login/LoginPage";
 import RegisterPage from "./pages/Register/RegisterPage";
+import Course from "./pages/Courses/Course";
 
 const ProtectedRoute = ({ children }) => {
   const user = localStorage.getItem("user") || sessionStorage.getItem("user");
@@ -21,11 +22,15 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: (
-          <ProtectedRoute>
+          // <ProtectedRoute>
             <Home />
-          </ProtectedRoute>
+          // </ProtectedRoute>
         ),
       },
+      {
+        path: '/course',
+        element: <Course />,
+      }
     ],
   },
   {

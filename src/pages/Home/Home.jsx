@@ -2,7 +2,7 @@ import React from 'react'
 import Sidebar from '../../components/layout/Sidebar';
 import Navbar from '../../components/layout/Navbar';
 import WelcomeBanner from '../../components/layout/WelcomeBanner';
-import StatCard from '../../components/common/StatCard';
+import StatCard from '../../components/ui/StatCard';
 import ChartSection from '../../components/layout/ChartSection';
 import { FaUsers, FaBook, FaPuzzlePiece, FaUserCheck } from 'react-icons/fa';
 import ModuleGrid from '../../components/layout/ModuleGrid';

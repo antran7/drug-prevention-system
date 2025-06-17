@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import Footer from './Footer'
-import ChatBubble from '../common/ChatBubble'
+import ChatBubble from '../ui/ChatBubble'
 
 
 const Layout = () => {
@@ -26,7 +26,7 @@ const Layout = () => {
                 {/* Sidebar NẰM TRONG flow layout */}
                 {sidebarState !== 3 && (
                     <div
-                        style={{ width: `${sidebarWidth}px` }}
+
                         className="bg-white shadow flex-shrink-0"
                     >
                         <Sidebar state={sidebarState} />
@@ -34,11 +34,9 @@ const Layout = () => {
                 )}
 
                 {/* Main content */}
-                <div className="flex-1">
-                    <main className="p-6 space-y-6">
-                        <Outlet />
-                    </main>
-                </div>
+                <main className="min-h-screen py-6 px-12 space-y-6 flex-1">
+                    <Outlet />
+                </main>
             </div>
 
             {/* Footer */}
