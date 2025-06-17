@@ -1,46 +1,46 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import { FaCheckSquare, FaTimesCircle } from 'react-icons/fa';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { FaCheckSquare, FaTimesCircle } from "react-icons/fa";
 
 const AddUser = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    username: '',
-    password: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    username: "",
+    password: "",
     enable2FA: false,
     lockUser: false,
-    role: 'SUPERADMIN',
+    role: "SUPERADMIN",
   });
 
   const handleChange = (e) => {
     const { name, type, checked, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch('https://683b29ab43bb370a8674e73d.mockapi.io/users', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    await fetch("https://683b29ab43bb370a8674e73d.mockapi.io/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     });
-    toast.success('User created!');
-    navigate('/users');
+    toast.success("User created!");
+    navigate("/users");
   };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 max-w-7xl mx-auto p-6">
+    <div className="flex flex-col items-center max-w-3xl w-full mx-auto p-6">
       {/* Form Card */}
       <form
         onSubmit={handleSubmit}
-        className="w-full lg:flex-1 bg-white p-6 rounded-xl shadow border"
+        className="w-full bg-white p-6 rounded-xl shadow-2x1 border"
       >
         <h2 className="text-2xl font-semibold mb-6">Create User</h2>
 
@@ -142,25 +142,23 @@ const AddUser = () => {
             className="w-full bg-gray-100 border border-gray-300 px-4 py-2 rounded text-gray-500"
           />
         </div>
-      </form>
 
-      {/* Sidebar */}
-      <div className="w-full lg:w-[250px] flex flex-col gap-3 pt-2">
-        <button
-          type="submit"
-          onClick={handleSubmit}
-          className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded flex items-center justify-center gap-2 cursor-pointer"
-        >
-          <FaCheckSquare /> Save
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate('/users')}
-          className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 rounded flex items-center justify-center gap-2 cursor-pointer"
-        >
-          <FaTimesCircle /> Cancel
-        </button>
-      </div>
+        <div className="flex gap-3 mt-6">
+          <button
+            type="submit"
+            className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded flex items-center justify-center gap-2 cursor-pointer"
+          >
+            Save
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate("/users")}
+            className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-6 rounded flex items-center justify-center gap-2 cursor-pointer"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

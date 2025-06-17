@@ -1,13 +1,21 @@
 import React from "react";
-import { FaCalendarAlt, FaClock, FaUser, FaTimes, FaSun } from "react-icons/fa";
+import {
+  FaCalendarAlt,
+  FaClock,
+  FaUser,
+  FaTimes,
+  FaSun,
+} from "react-icons/fa";
+import ModalPortal from "../../components/common/ModalPortal";
 
 const UserHistoryModal = ({ show, onClose, history }) => {
   if (!show) return null;
 
   return (
-    <div className="fixed inset-0 bg-white bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50">
+      <ModalPortal>
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
 
-      <div className="bg-white w-full max-w-md rounded-xl shadow-xl p-6 relative">
+      <div className="bg-white/80 backdrop-blur-xl w-full max-w-md rounded-2xl shadow-xl p-6 relative border border-white/30">
         {/* Close button top right */}
         <button
           onClick={onClose}
@@ -21,7 +29,7 @@ const UserHistoryModal = ({ show, onClose, history }) => {
         <h2 className="text-xl font-semibold text-center mb-4">User History</h2>
 
         {/* Content */}
-        <div className="space-y-3 text-sm text-gray-800">
+        <div className="space-y-3 text-sm text-gray-800 overflow-y-auto max-h-[70vh]">
           {/* Created */}
           <div className="flex items-center gap-2">
             <FaCalendarAlt className="text-blue-500" />
@@ -81,6 +89,7 @@ const UserHistoryModal = ({ show, onClose, history }) => {
         </div>
       </div>
     </div>
+    </ModalPortal>
   );
 };
 

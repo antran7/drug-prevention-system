@@ -7,11 +7,11 @@ const UserTable = ({
   selected,
   onSelect,
   onDelete,
-  onShowHistory, // nhận props này
+  onShowHistory,
   startIndex = 0,
 }) => {
   return (
-    <div className="overflow-x-auto shadow rounded bg-white">
+    <div className="overflow-x-auto shadow-lg rounded-xl bg-white ring-1 ring-gray-200/50">
       <table className="min-w-full border border-gray-300 text-sm text-center">
         <thead className="bg-gray-100">
           <tr>
@@ -29,7 +29,10 @@ const UserTable = ({
         </thead>
         <tbody>
           {users.map((user, idx) => (
-            <tr key={user.id} className="hover:bg-gray-50">
+            <tr
+              key={user.id}
+              className="hover:bg-gray-50 hover:shadow transition duration-200"
+            >
               <td className="border border-gray-200 px-4 py-2">
                 <input
                   type="checkbox"
@@ -47,18 +50,18 @@ const UserTable = ({
                 <div className="flex justify-center gap-2">
                   <Link
                     to={`/users/${user.id}/edit`}
-                    className="p-2 bg-yellow-400 text-white rounded hover:bg-yellow-500 cursor-pointer"
+                    className="p-2 bg-yellow-400 text-white rounded shadow hover:bg-yellow-500 transition"
                   >
                     <FaEdit />
                   </Link>
                   <button
                     onClick={() => onDelete(user.id)}
-                    className="p-2 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer"
+                    className="p-2 bg-red-500 text-white rounded shadow hover:bg-red-600 transition cursor-pointer"
                   >
                     <FaTrash />
                   </button>
                   <button
-                    className="p-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 cursor-pointer"
+                    className="p-2 bg-gray-300 text-gray-700 rounded shadow hover:bg-gray-400 transition cursor-pointer"
                     onClick={() => onShowHistory(user)}
                   >
                     <FaClock />

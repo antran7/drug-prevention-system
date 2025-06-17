@@ -63,7 +63,7 @@ const EditUser = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 max-w-7xl mx-auto p-6">
+    <div className="flex flex-col lg:flex-row gap-6 max-w-5xl w-full mx-auto p-6">
       {/* Left: form card */}
       <form
         onSubmit={handleSubmit}
