@@ -16,32 +16,28 @@ const Layout = () => {
   const sidebarWidth = sidebarState === 1 ? 80 : sidebarState === 2 ? 256 : 0;
 
   return (
-    <>
-      <div className="fixed top-0 left-0 right-0 z-50">
+    <div className="flex flex-col min-h-screen">
+      <div className="sticky top-0 z-40">
         <Navbar onToggle={toggleSidebar} />
       </div>
+      <div className="flex flex-1">
+        {sidebarState !== 3 && (
+          <div className="bg-white shadow flex-shrink-0 h-screen sticky top-0">
+            <Sidebar state={sidebarState} />
+          </div>
+        )}
 
-            {/* Content area */}
-            <div className="flex flex-1 pt-16">
-                {/* Sidebar NẰM TRONG flow layout */}
-                {sidebarState !== 3 && (
-                    <div
+        {/* Main content area */}
+        <div className="flex-1 flex flex-col">
+          {/* Content */}
+          <main className="py-6 px-16 space-y-6 flex-1">
+            <Outlet />
+          </main>
+        </div>
+      </div>
 
-                        className="bg-white shadow flex-shrink-0"
-                    >
-                        <Sidebar state={sidebarState} />
-                    </div>
-                )}
-
-                {/* Main content */}
-                <main className="min-h-screen py-6 px-12 space-y-6 flex-1">
-                    <Outlet />
-                </main>
-            </div>
-
-      {/* Chat bubble */}
       <ChatBubble />
-    </>
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 import { forwardRef } from "react"
 
-export const SearchBar = forwardRef((props, ref) => {
+export const Input = forwardRef((props, ref) => {
     return (
         <input
             ref={ref}

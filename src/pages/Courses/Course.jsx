@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { SearchBar } from '../../components/ui/SearchBar'
+import { Input } from '../../components/ui/Input'
 import { IoAppsOutline, IoSearchOutline } from 'react-icons/io5'
 import { FaBookOpen, FaChartLine, FaEye, FaPrint } from 'react-icons/fa6'
 import { TfiExport, TfiImport } from 'react-icons/tfi'
@@ -7,6 +7,7 @@ import { IoIosAddCircleOutline } from 'react-icons/io'
 import { getAllCourse } from '../../services/courseService'
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa'
 import { MdChecklist } from 'react-icons/md'
+import { Link } from 'react-router-dom'
 
 
 const PER_PAGE = 10;
@@ -43,7 +44,7 @@ const Course = () => {
             <h1 className='text-4xl font-semibold antialiased py-2'>Courses</h1>
             <div className='flex justify-between'>
                 <div className='flex justify-center items-center gap-2'>
-                    <SearchBar
+                    <Input
                         type="text"
                         className='h-10 min-w-[400px] border-gray-300 border border-input rounded-md p-2 focus:outline-none focus:border-blue-600 focus-visible:ring-4 focus-visible:ring-blue-200'
                         placeholder="Search by course name"
@@ -53,29 +54,32 @@ const Course = () => {
                     </div>
                 </div>
                 <div className='flex gap-2 justify-center items-center'>
-                    <div className='h-10 flex items-center border-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'>
+                    <button className='h-10 flex items-center border-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'>
                         <IoAppsOutline />
-                    </div>
-                    <div className='h-10 flex justify-center items-center gap-1 border-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'>
+                    </button>
+                    <button className='h-10 flex justify-center items-center gap-1 border-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'>
                         <FaChartLine />
                         Reports
-                    </div>
-                    <div className='h-10 border-1 flex justify-center items-center gap-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'>
+                    </button>
+                    <button className='h-10 border-1 flex justify-center items-center gap-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'>
                         <TfiExport />
                         Import
-                    </div>
-                    <div className='h-10 border-1 flex justify-center items-center gap-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'>
+                    </button>
+                    <button className='h-10 border-1 flex justify-center items-center gap-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'>
                         <TfiImport />
                         Export
-                    </div>
-                    <div className='h-10 border-1 flex justify-center items-center gap-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'>
+                    </button>
+                    <button className='h-10 border-1 flex justify-center items-center gap-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'>
                         <FaPrint />
                         Print Courses
-                    </div>
-                    <div className='h-10 flex justify-center items-center gap-1 bg-blue-500 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition-colors'>
+                    </button>
+                    <Link
+                        to='create'
+                        className='h-10 flex justify-center items-center gap-1 bg-blue-500 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition-colors'
+                    >
                         <IoIosAddCircleOutline />
                         Add New Course
-                    </div>
+                    </Link>
                 </div>
             </div>
             <div className='py-6'>

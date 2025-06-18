@@ -34,7 +34,7 @@ export default function Sidebar({ state }) {
       items: [
         { icon: <FaTrophy />, label: "Achievement", to: "/achievements" },
         { icon: <FaRoute />, label: "Learning Path", to: "/paths" },
-        { icon: <FaBook />, label: "Course", to: "/courses" },
+        { icon: <FaBook />, label: "Course", to: "/course" },
         { icon: <FaCertificate />, label: "Certification", to: "/certifications" },
         { icon: <FaFolderOpen />, label: "Resource", to: "/resources" },
         { icon: <FaFolder />, label: "Syllabus", to: "/syllabus" },
