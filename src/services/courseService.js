@@ -10,7 +10,7 @@ export const getAllCourse = async () => {
     }
 }
 
-export const createPost = async (courseData) => {
+export const createCourse = async (courseData) => {
     try {
         const response = await axiosInstance.post("/Course", courseData);
         return response.data;

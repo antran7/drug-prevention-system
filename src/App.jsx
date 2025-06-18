@@ -12,6 +12,7 @@ import Course from "./pages/Courses/Course";
 import UserList from "./pages/User/UserList";
 import AddUser from "./pages/User/AddUser";
 import EditUser from "./pages/User/EditUser";
+import CreateCourse from "./pages/Courses/CreateCourse";
 
 const ProtectedRoute = ({ children }) => {
   const user = localStorage.getItem("user") || sessionStorage.getItem("user");
@@ -26,14 +27,26 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: (
-          // <ProtectedRoute>
+          <ProtectedRoute>
             <Home />
-          // </ProtectedRoute>
+          </ProtectedRoute>
         ),
       },
       {
         path: '/course',
-        element: <Course />,
+        element: (
+          <ProtectedRoute>
+            <Course />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/course/create',
+        element: (
+          <ProtectedRoute>
+            <CreateCourse />
+          </ProtectedRoute>
+        )
       },
       {
         path: "/users",
