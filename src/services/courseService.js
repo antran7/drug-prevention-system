@@ -19,3 +19,13 @@ export const createCourse = async (courseData) => {
         throw error;
     }
 }
+
+export const deleteCourse = async (id) => {
+    try {
+        const response = await axiosInstance.delete(`/Course/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error deleting course:", error);
+        throw error;
+    }
+}

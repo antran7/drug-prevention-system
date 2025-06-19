@@ -23,7 +23,7 @@ const UserList = () => {
   const [historyData, setHistoryData] = useState({});
 
   const fetchUsers = () => {
-    fetch("https://683b29ab43bb370a8674e73d.mockapi.io/users")
+    fetch("https://684f8c28e7c42cfd179502d0.mockapi.io/api/user")
       .then((res) => res.json())
       .then((data) => setUsers(data));
   };
@@ -41,7 +41,7 @@ const UserList = () => {
   const handleBulkDelete = async () => {
     await Promise.all(
       selected.map((id) =>
-        fetch(`https://683b29ab43bb370a8674e73d.mockapi.io/users/${id}`, {
+        fetch(`https://684f8c28e7c42cfd179502d0.mockapi.io/api/user/${id}`, {
           method: "DELETE",
         })
       )
@@ -144,7 +144,7 @@ const UserList = () => {
           onSelect={handleSelect}
           onDelete={async (id) => {
             await fetch(
-              `https://683b29ab43bb370a8674e73d.mockapi.io/users/${id}`,
+              `https://684f8c28e7c42cfd179502d0.mockapi.io/api/user/${id}`,
               {
                 method: "DELETE",
               }

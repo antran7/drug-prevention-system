@@ -4,7 +4,7 @@ export const Input = forwardRef((props, ref) => {
     return (
         <input
             ref={ref}
-            type={props.className}
+            type={props.type}
             className={props.className}
             {...props}
         />
