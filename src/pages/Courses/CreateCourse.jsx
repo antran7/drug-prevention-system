@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Input } from '../../components/ui/Input'
 import ImageDrop from '../../components/ui/ImageDrop'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { createCourse } from '../../services/courseService';
 import toast from 'react-hot-toast';
 
 const CreateCourse = () => {
+    const navigate = useNavigate();
     const [imageFile, setImageFile] = useState(null);
 
     const {
@@ -23,6 +24,7 @@ const CreateCourse = () => {
             toast("New course added successfully", {
                 icon: "✅",
             });
+            navigate('/course');
         } catch (error) {
             toast(error.toString(), {
                 icon: "❌",
