@@ -17,6 +17,7 @@ const PER_PAGE = 10;
 const Course = () => {
     const [courses, setCourses] = useState([]);
     const [currentCourses, setCurrentCourses] = useState([]);
+    const [filteredCourses, setFilteredCourses] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const startIdx = (currentPage - 1) * PER_PAGE;
@@ -28,26 +29,6 @@ const Course = () => {
         if (page >= 1 && page <= totalPages) setCurrentPage(page);
         console.log(currentPage);
     }
-
-    // const handleDelete = useCallback(async () => {
-    //     try {
-    //         if (!selectedCourseId) {
-    //             console.error("No course selected");
-    //             return;
-    //         }
-    //         await deleteCourse(selectedCourseId);
-    //         setCourses(courses.filter(course => course.id !== selectedCourseId));
-    //         toast("Course deleted successfully", {
-    //             icon: "✅",
-    //         })
-    //         setIsModalOpen(false);
-    //         setSelectedCourseId(null);
-    //     } catch (error) {
-    //         toast(error.toString(), {
-    //             icon: "❌",
-    //         });
-    //     }
-    // }, [selectedCourseId]);
 
     const handleDelete = useCallback(async () => {
         try {
@@ -83,9 +64,13 @@ const Course = () => {
     const handleSearch = (e) => {
         if (e.type === "keydown" && e.key !== "Enter") return;
         const searchTerm = inputRef.current.value;
-        setCurrentCourses(courses.filter(course => course.courseName.includes(searchTerm)));
-        setTotalPages(Math.ceil(currentCourses.length / PER_PAGE));
+        const searchCourses = courses.filter(course => 
+            course.courseName.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredCourses(searchCourses);
         setCurrentPage(1);
+        setTotalPages(Math.ceil(searchCourses.length / PER_PAGE));
+        setCurrentCourses(searchCourses.slice(0, PER_PAGE));
     }
 
     useEffect(() => {
@@ -100,9 +85,13 @@ const Course = () => {
     }, [])
 
     useEffect(() => {
-        setCurrentCourses(courses.slice(startIdx, startIdx + PER_PAGE));
-        setTotalPages(Math.ceil(courses.length / PER_PAGE));
-    }, [currentPage, courses]);
+        const startIdx = (currentPage - 1) * PER_PAGE;
+        setCurrentCourses(
+        filteredCourses.length > 0 
+            ? filteredCourses.slice(startIdx, startIdx + PER_PAGE)
+            : courses.slice(startIdx, startIdx + PER_PAGE)
+    );
+    }, [currentPage, courses, filteredCourses]);
 
     return (
         <div className='h-full text-center'>
