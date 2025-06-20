@@ -32,6 +32,18 @@ const UserList = () => {
     fetchUsers();
   }, []);
 
+  // Sau khi fetchUsers(), cập nhật lại currentPage nếu cần
+  useEffect(() => {
+    const totalPages = Math.ceil(
+      users.filter((u) =>
+        u.username?.toLowerCase().includes(search.toLowerCase())
+      ).length / itemsPerPage
+    );
+    if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(totalPages);
+    }
+  }, [users, search, currentPage, itemsPerPage]);
+
   const handleSelect = (id) => {
     setSelected((prev) =>
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]

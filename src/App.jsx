@@ -3,16 +3,19 @@ import {
   RouterProvider,
   Navigate,
 } from "react-router-dom";
+
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home/Home";
 import LoginPage from "./pages/Login/LoginPage";
 import RegisterPage from "./pages/Register/RegisterPage";
 import Course from "./pages/Courses/Course";
+import CreateCourse from "./pages/Courses/CreateCourse";
 
 import UserList from "./pages/User/UserList";
 import AddUser from "./pages/User/AddUser";
 import EditUser from "./pages/User/EditUser";
-import CreateCourse from "./pages/Courses/CreateCourse";
+import ProfilePage from "./pages/User/ProfilePage";
+import EditProfile from "./pages/User/EditProfile"; // ✅ Thêm
 
 const ProtectedRoute = ({ children }) => {
   const user = localStorage.getItem("user") || sessionStorage.getItem("user");
@@ -33,7 +36,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/course',
+        path: "/course",
         element: (
           <ProtectedRoute>
             <Course />
@@ -41,12 +44,12 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/course/create',
+        path: "/course/create",
         element: (
           <ProtectedRoute>
             <CreateCourse />
           </ProtectedRoute>
-        )
+        ),
       },
       {
         path: "/users",
@@ -69,6 +72,22 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <EditUser />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/profile/edit",
+        element: (
+          <ProtectedRoute>
+            <EditProfile />
           </ProtectedRoute>
         ),
       },

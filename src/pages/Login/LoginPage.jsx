@@ -37,11 +37,18 @@ function LoginPage() {
         );
 
         if (user) {
-          if (state.keepLoggedIn) {
-            localStorage.setItem("user", JSON.stringify(user));
-          } else {
-            sessionStorage.setItem("user", JSON.stringify(user));
-          }
+          const storage = state.keepLoggedIn ? localStorage : sessionStorage;
+
+          storage.setItem(
+            "user",
+            JSON.stringify({
+              id: user.id,
+              username: user.username,
+              role: user.role,
+              phoneNumber: user.phoneNumber,
+            })
+          );
+
           navigate("/");
         } else {
           setErrors({ general: "Invalid username or password." });
