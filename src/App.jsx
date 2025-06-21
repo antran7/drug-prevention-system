@@ -10,12 +10,14 @@ import LoginPage from "./pages/Login/LoginPage";
 import RegisterPage from "./pages/Register/RegisterPage";
 import Course from "./pages/Courses/Course";
 import CreateCourse from "./pages/Courses/CreateCourse";
+import GoToLearn from "./pages/Courses/GoToLearn";
+import CourseDetail from "./pages/Courses/CourseDetail";
 
 import UserList from "./pages/User/UserList";
 import AddUser from "./pages/User/AddUser";
 import EditUser from "./pages/User/EditUser";
 import ProfilePage from "./pages/User/ProfilePage";
-import EditProfile from "./pages/User/EditProfile"; // ✅ Thêm
+import EditProfile from "./pages/User/EditProfile";
 
 const ProtectedRoute = ({ children }) => {
   const user = localStorage.getItem("user") || sessionStorage.getItem("user");
@@ -48,6 +50,22 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <CreateCourse />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/go-to-learn",
+        element: (
+          <ProtectedRoute>
+            <GoToLearn />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/courses/:id",
+        element: (
+          <ProtectedRoute>
+            <CourseDetail />
           </ProtectedRoute>
         ),
       },
