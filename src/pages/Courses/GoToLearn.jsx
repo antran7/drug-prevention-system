@@ -102,14 +102,14 @@ const GoToLearnPage = () => {
               </div>
               <div className="flex justify-center gap-3 mt-2 w-full ">
                 <button className="cursor-pointer flex-1 flex items-center justify-center gap-2 bg-blue-600 text-white px-3 py-1.5 rounded-md font-semibold text-xs hover:bg-blue-700 transition h-7 max-w-[160px]">
-                  <i className="fa-solid fa-play text-sm"></i>
+                  <i className="fa-solid fa-circle-play text-sm"></i>
                   Learning
                 </button>
                 <Link
                   to={`/courses/${course.id}`}
                   className="flex-1 flex items-center justify-center gap-2 border border-blue-500 text-blue-600 px-3 py-1.5 rounded-md font-semibold text-xs hover:bg-blue-50 transition h-7 max-w-[160px]"
                 >
-                  <i className="fa-regular fa-circle-info text-sm"></i>
+                  <i className="fa-solid fa-circle-info text-sm"></i>
                   Details
                 </Link>
               </div>

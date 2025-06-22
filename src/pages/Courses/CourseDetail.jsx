@@ -35,7 +35,7 @@ const CourseDetail = () => {
   }
 
   return (
-    <div className="p-6 space-y-8">
+    <div className="p-2 space-y-8">
       <h1 className="text-4xl font-bold">{course.courseName}</h1>
 
       {/* Course Header */}
