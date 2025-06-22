@@ -30,7 +30,7 @@ const Layout = () => {
         {/* Main content area */}
         <div className="flex-1 flex flex-col">
           {/* Content */}
-          <main className="py-6 px-16 space-y-6 flex-1">
+          <main className="py-6 px-6 space-y-6 flex-1">
             <Outlet />
           </main>
         </div>

@@ -52,24 +52,28 @@ const GoToLearnPage = () => {
   }, []);
 
   return (
-    <div className="p-6">
+    <div className="pt-6 pb-6 px-0 w-full">
       {/* Banner */}
-      <div className="bg-gray-100 p-8 rounded-xl text-center mb-8">
-        <h1 className="text-4xl font-bold mb-2">Discover Your Next Course</h1>
-        <p className="text-gray-600 mb-6">
+      <div className="bg-gradient-to-br from-[#eceff1] to-[#f6fbff] rounded-b-3xl rounded-t-2xl text-center mb-8 px-2 py-10 w-full shadow-sm">
+        <h1 className="text-5xl font-bold mb-4">Discover Your Next Course</h1>
+        <p className="text-gray-600 mb-8 text-lg">
           Expand your knowledge with our carefully curated courses
         </p>
         <div className="flex justify-center">
-          <input
-            type="text"
-            placeholder="What do you want to learn today?"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="px-4 py-2 rounded-l-md border border-gray-300 w-96 focus:outline-none"
-          />
-          <button className="bg-blue-600 text-white px-4 rounded-r-md">
-            🔍
-          </button>
+          <div className="flex items-center gap-2">
+            <div className="bg-white rounded-full shadow-lg px-2 py-2 w-[500px] max-w-full border-2 border-white focus-within:ring-2 focus-within:ring-blue-400 transition">
+              <input
+                type="text"
+                placeholder="What do you want to learn today?"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full bg-transparent px-4 py-2 rounded-full focus:outline-none text-base h-10 border-none "
+              />
+            </div>
+            <button className="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl transition shadow-lg">
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -79,27 +83,34 @@ const GoToLearnPage = () => {
         {filteredCourses.slice(0, visibleCount).map((course) => (
           <div
             key={course.id}
-            className="bg-white rounded-xl shadow-md overflow-hidden relative"
+            className="bg-white rounded-2xl border border-gray-200 shadow-xl hover:shadow-2xl overflow-hidden relative transition-all duration-300 hover:scale-105 group max-w-[550px]"
           >
-            <div className="h-36 bg-gray-300 flex items-center justify-center text-3xl text-gray-500 font-semibold relative">
-              Course
+            <div className="h-36 bg-gray-200 flex items-center justify-center">
+              <span className="text-5xl text-gray-400 font-bold transition-transform duration-300 group-hover:scale-110">
+                Course
+              </span>
             </div>
             <div className="p-4 space-y-2">
-              <h3 className="font-semibold text-sm">{course.courseName}</h3>
+              <h3 className="font-semibold text-lg">{course.courseName}</h3>
               <p className="text-xs text-gray-500">No Instructor</p>
-              <div className="flex items-center space-x-1 text-sm">
-                <span className="text-yellow-500">★★★★★</span>
-                <span className="text-gray-500">(4.8)</span>
-                <button className="ml-auto text-xs text-blue-600 border px-2 rounded hover:underline">
+              <div className="flex items-center space-x-1 text-base mb-2">
+                <span className="text-yellow-500 text-lg">★★★★★</span>
+                <span className="text-gray-600 text-sm">(4.8)</span>
+                <button className="cursor-pointer ml-2 text-xs border border-blue-500 text-blue-600 px-3 py-1 rounded-full hover:bg-blue-50 transition">
                   Feedback
                 </button>
               </div>
-              <div className="flex gap-2">
+              <div className="flex justify-center gap-3 mt-2 w-full ">
+                <button className="cursor-pointer flex-1 flex items-center justify-center gap-2 bg-blue-600 text-white px-3 py-1.5 rounded-md font-semibold text-xs hover:bg-blue-700 transition h-7 max-w-[160px]">
+                  <i className="fa-solid fa-play text-sm"></i>
+                  Learning
+                </button>
                 <Link
                   to={`/courses/${course.id}`}
-                  className="border border-blue-600 text-blue-600 text-sm px-3 py-1 rounded w-full text-center"
+                  className="flex-1 flex items-center justify-center gap-2 border border-blue-500 text-blue-600 px-3 py-1.5 rounded-md font-semibold text-xs hover:bg-blue-50 transition h-7 max-w-[160px]"
                 >
-                  ℹ Details
+                  <i className="fa-regular fa-circle-info text-sm"></i>
+                  Details
                 </Link>
               </div>
             </div>
@@ -112,15 +123,17 @@ const GoToLearnPage = () => {
         <div className="mt-6 text-center">
           <button
             onClick={handleToggle}
-            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+            className="mx-auto text-sm border border-blue-500 text-blue-600 bg-white text-base px-6 py-2 rounded cursor-pointer flex items-center justify-center gap-2 transition hover:bg-blue-600 hover:text-white hover:border-blue-700 "
+            style={{ minWidth: 120 }}
           >
             {expanded ? "Show Less" : "Load More Courses"}
+            <span className="text-lg">{expanded ? "▲" : "▼"}</span>
           </button>
         </div>
       )}
 
       {/* Recently Learned Courses */}
-      <h2 className="text-2xl font-semibold my-8 border-b border-gray-300 pb-2">
+      <h2 className="text-2xl font-semibold my-8 border-b border-gray-300 pb-2 text-center">
         Recently Learned Courses
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
