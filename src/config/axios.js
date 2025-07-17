@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: "https://684f8c28e7c42cfd179502d0.mockapi.io/api",
+    baseURL: "https://drug-prevention-api-starter.onrender.com/api",
+    timeout: 5000,
     headers: {
         "Content-Type": "application/json",
     }
@@ -9,7 +10,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem("access_token");
+        const token = localStorage.getItem("token");
         if (token) {
             config.headers["Authorization"] = `Bearer ${token}`;
         }
@@ -26,7 +27,7 @@ axiosInstance.interceptors.response.use(
         if (error.response?.status === "401") {
             console.log("Unauthorized! Redirecting to login...");
         }
-        return Promise.reject(error);
+        return Promise.reject(error.response.data);
     }
 )
 

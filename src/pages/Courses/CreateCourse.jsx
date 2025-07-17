@@ -84,8 +84,16 @@ const CreateCourse = () => {
                             <div className='grow-0'>
                                 <label htmlFor="duration" className='block font-medium text-gray-700 mb-1'>Course Duration (Weeks):</label>
                                 <Input
+                                    id="duration"
                                     type="number"
-                                    {...register("duration", { required: "Duration is required" })}
+                                    {...register("duration", { 
+                                        required: "Duration is required", 
+                                        valueAsNumber: true,
+                                        min: {
+                                            value: 1,
+                                            message: "Duration must be greater than 0"
+                                        }
+                                    })}
                                     defaultValue={0}
                                     className='h-10 w-full border-gray-300 border border-input rounded-md p-2 focus:outline-none focus:border-blue-600 focus-visible:ring-4 focus-visible:ring-blue-200'
                                 />
@@ -94,6 +102,7 @@ const CreateCourse = () => {
                             <div className='grow-2'>
                                 <label htmlFor="language" className='block font-medium text-gray-700 mb-1'>Course Language:</label>
                                 <Input
+                                    id="language"
                                     type="text"
                                     {...register("language", { required: "Language is required" })}
                                     placeholder='Enter course language'
@@ -104,6 +113,7 @@ const CreateCourse = () => {
                             <div className='grow-3'>
                                 <label htmlFor="level" className='block font-medium text-gray-700 mb-1'>Course Level:</label>
                                 <Input
+                                    id="level"
                                     type="text"
                                     {...register("level", { required: "Level is required" })}
                                     placeholder='Enter course level (e.g., Beginner, Intermediate, Advanced)'
@@ -116,6 +126,7 @@ const CreateCourse = () => {
                             <div className='grow-1'>
                                 <label htmlFor="price" className='block font-medium text-gray-700 mb-1'>Course Price:</label>
                                 <Input
+                                    id="price"
                                     type='number'
                                     defaultValue={0}
                                     {...register("price", {
@@ -133,7 +144,15 @@ const CreateCourse = () => {
                             <div className='grow-1'>
                                 <label htmlFor="discount" className='block font-medium text-gray-700 mb-1'>Course Discount (%):</label>
                                 <Input
+                                    id="discount"
                                     type='number'
+                                    {...register("discount", {
+                                        valueAsNumber: true,
+                                        min: {
+                                            value: 1,
+                                            message: "Discount must be greater than 0"
+                                        }
+                                    })}
                                     defaultValue={0}
                                     className='h-10 w-full border-gray-300 border border-input rounded-md p-2 focus:outline-none focus:border-blue-600 focus-visible:ring-4 focus-visible:ring-blue-200'
                                 />
@@ -159,8 +178,8 @@ const CreateCourse = () => {
                             <div className='grow-1'>
                                 <label htmlFor="syllabus" className='block font-medium text-gray-700 mb-1'>Course Syllabus Template:</label>
                                 <select
-                                    name=""
                                     id="syllabus"
+                                    {...register("syllabus")}
                                     className='h-10 w-full border-gray-300 border border-input rounded-md p-2 focus:outline-none focus:border-blue-600 focus-visible:ring-4 focus-visible:ring-blue-200'
                                 >
                                     <option>Select Syllabus (Optional)</option>
@@ -173,6 +192,7 @@ const CreateCourse = () => {
                         <div className='mb-5'>
                             <label htmlFor="image" className='block font-medium text-gray-700 mb-1'>Course Image:</label>
                             <ImageDrop
+                                id="image"
                                 onImageSelect={setImageFile}
                                 {...register("image", {
                                     required: "Please select an image",

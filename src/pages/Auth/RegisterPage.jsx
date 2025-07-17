@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../components/styles/LoginPage.css";
+import { registerAccount } from "../../services/authService";
+import toast from "react-hot-toast";
 
-// Component Trang Đăng Ký
 function RegisterPage() {
   const [state, setState] = useState({
-    firstName: "",
-    lastName: "",
+    fullName: "",
     email: "",
     username: "",
     password: "",
@@ -15,10 +15,9 @@ function RegisterPage() {
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
-    e.preventDefault(); // Ngăn chặn hành vi mặc định của form (reload trang)
+    e.preventDefault();
     let newErrors = {};
-    if (!state.firstName) newErrors.firstName = "First Name is required.";
-    if (!state.lastName) newErrors.lastName = "Last Name is required.";
+    if (!state.fullName) newErrors.fullName = "Full Name is required.";
     if (!state.email) newErrors.email = "Email is required.";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email))
       newErrors.email = "Please enter a valid email.";
@@ -28,48 +27,19 @@ function RegisterPage() {
 
     if (Object.keys(newErrors).length === 0) {
       try {
-     
-        const response = await fetch("https://683b29ab43bb370a8674e73d.mockapi.io/users");
-        const users = await response.json();
-
-        const userExists = users.some(
-          (user) => user.username === state.username || user.email === state.email
-        );
-
-        if (userExists) {
-          setErrors({
-            general: "Username or email already exists. Please choose another.",
+        const response = await registerAccount(state);
+        if (response) {
+          toast(response.message, {
+            icon: "✅",
           });
-          return;
-        }
-
-        
-        const newUser = {
-          firstName: state.firstName,
-          lastName: state.lastName,
-          email: state.email,
-          username: state.username,
-          password: state.password,
-        };
-
-        const registerResponse = await fetch(
-          "https://683b29ab43bb370a8674e73d.mockapi.io/users",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newUser),
-          }
-        );
-
-        if (registerResponse.ok) {
-          navigate("/login"); 
+          navigate("/login");
         } else {
           setErrors({ general: "Registration failed. Please try again." });
         }
       } catch (error) {
-        console.error("Registration error:", error);
+        toast(error.message.toString(), {
+          icon: "❌",
+        });
         setErrors({ general: "An error occurred. Please try again." });
       }
     }
@@ -106,31 +76,31 @@ function RegisterPage() {
             <form onSubmit={handleRegister} className="space-y-4">
               <div className="mb-4 input-group">
                 <label className="block text-xs mb-1 font-semibold">
-                  First Name<span className="text-red-500 ml-1">*</span>
+                  Username<span className="text-red-500 ml-1">*</span>
                 </label>
                 <input
                   type="text"
-                  name="firstName"
-                  value={state.firstName}
+                  name="username"
+                  value={state.username}
                   onChange={handleChange}
                   className="w-full p-1 pl-2.5 border rounded bg-gray-100 focus:bg-white hover:bg-white focus:outline-none focus:ring-2 focus:ring-green-400 hover:border-green-400"
-                  autoComplete="given-name"
+                  autoComplete="username"
                 />
-                {errors.firstName && (
-                  <div className="text-red-500 text-xs mt-1">{errors.firstName}</div>
+                {errors.username && (
+                  <div className="text-red-500 text-xs mt-1">{errors.username}</div>
                 )}
               </div>
               <div className="mb-4 input-group">
                 <label className="block text-xs mb-1 font-semibold">
-                  Last Name<span className="text-red-500 ml-1">*</span>
+                  Full Name<span className="text-red-500 ml-1">*</span>
                 </label>
                 <input
                   type="text"
-                  name="lastName"
-                  value={state.lastName}
+                  name="fullName"
+                  value={state.fullName}
                   onChange={handleChange}
                   className="w-full p-1 pl-2.5 border rounded bg-gray-100 focus:bg-white hover:bg-white focus:outline-none focus:ring-2 focus:ring-green-400 hover:border-green-400"
-                  autoComplete="family-name"
+                  autoComplete="full-name"
                 />
                 {errors.lastName && (
                   <div className="text-red-500 text-xs mt-1">{errors.lastName}</div>
@@ -152,22 +122,6 @@ function RegisterPage() {
                   <div className="text-red-500 text-xs mt-1">{errors.email}</div>
                 )}
               </div>
-              <div className="mb-4 input-group">
-                <label className="block text-xs mb-1 font-semibold">
-                  Username<span className="text-red-500 ml-1">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="username"
-                  value={state.username}
-                  onChange={handleChange}
-                  className="w-full p-1 pl-2.5 border rounded bg-gray-100 focus:bg-white hover:bg-white focus:outline-none focus:ring-2 focus:ring-green-400 hover:border-green-400"
-                  autoComplete="username"
-                />
-                {errors.username && (
-                  <div className="text-red-500 text-xs mt-1">{errors.username}</div>
-                )}
-              </div>
               <div className="mb-6 input-group">
                 <label className="block text-xs mb-1 font-semibold">
                   Password<span className="text-red-500 ml-1">*</span>
@@ -185,7 +139,7 @@ function RegisterPage() {
                 )}
               </div>
               <button
-                type="submit" 
+                type="submit"
                 className="login-btn w-full text-white p-3 rounded font-semibold text-lg shadow-md hover:opacity-90 transition"
               >
                 Register

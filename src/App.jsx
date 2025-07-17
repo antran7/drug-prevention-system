@@ -5,14 +5,14 @@ import {
 } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home/Home";
-import LoginPage from "./pages/Login/LoginPage";
-import RegisterPage from "./pages/Register/RegisterPage";
 import Course from "./pages/Courses/Course";
-
 import UserList from "./pages/User/UserList";
 import AddUser from "./pages/User/AddUser";
 import EditUser from "./pages/User/EditUser";
 import CreateCourse from "./pages/Courses/CreateCourse";
+import EditCourse from "./pages/Courses/EditCourse";
+import LoginPage from "./pages/Auth/LoginPage";
+import RegisterPage from "./pages/Auth/RegisterPage";
 
 const ProtectedRoute = ({ children }) => {
   const user = localStorage.getItem("user") || sessionStorage.getItem("user");
@@ -45,6 +45,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <CreateCourse />
+          </ProtectedRoute>
+        )
+      },
+      {
+        path: '/course/edit/:id',
+        element: (
+          <ProtectedRoute>
+            <EditCourse />
           </ProtectedRoute>
         )
       },

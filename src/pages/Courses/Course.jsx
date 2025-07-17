@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Input } from '../../components/ui/Input'
-import { IoAppsOutline, IoSearchOutline } from 'react-icons/io5'
-import { FaBookOpen, FaChartLine, FaEye, FaPrint } from 'react-icons/fa6'
+// import { FaBookOpen, FaChartLine, FaEye, FaPrint } from 'react-icons/fa6'
 import { TfiExport, TfiImport } from 'react-icons/tfi'
 import { IoIosAddCircleOutline } from 'react-icons/io'
 import { deleteCourse, getAllCourse } from '../../services/courseService'
-import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa'
+import { FaBookOpen, FaChartLine, FaEye, FaPrint, FaRegEdit, FaRegTrashAlt, FaSistrix, FaThLarge } from 'react-icons/fa'
 import { MdChecklist } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import ConfirmModal from '../../components/ui/ConfirmModal'
@@ -64,7 +63,7 @@ const Course = () => {
     const handleSearch = (e) => {
         if (e.type === "keydown" && e.key !== "Enter") return;
         const searchTerm = inputRef.current.value;
-        const searchCourses = courses.filter(course => 
+        const searchCourses = courses.filter(course =>
             course.courseName.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredCourses(searchCourses);
@@ -87,10 +86,10 @@ const Course = () => {
     useEffect(() => {
         const startIdx = (currentPage - 1) * PER_PAGE;
         setCurrentCourses(
-        filteredCourses.length > 0 
-            ? filteredCourses.slice(startIdx, startIdx + PER_PAGE)
-            : courses.slice(startIdx, startIdx + PER_PAGE)
-    );
+            filteredCourses.length > 0
+                ? filteredCourses.slice(startIdx, startIdx + PER_PAGE)
+                : courses.slice(startIdx, startIdx + PER_PAGE)
+        );
     }, [currentPage, courses, filteredCourses]);
 
     return (
@@ -109,12 +108,12 @@ const Course = () => {
                         onClick={handleSearch}
                         className='h-10 border-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'
                     >
-                        <IoSearchOutline size={20} />
+                        <FaSistrix size={20} />
                     </button>
                 </div>
                 <div className='flex gap-2 justify-center items-center'>
                     <button className='h-10 flex items-center border-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'>
-                        <IoAppsOutline />
+                        <FaThLarge />
                     </button>
                     <button className='h-10 flex justify-center items-center gap-1 border-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'>
                         <FaChartLine />
@@ -165,9 +164,12 @@ const Course = () => {
                                         <button className='h-10 flex items-center border-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'>
                                             <FaBookOpen />
                                         </button>
-                                        <button className='h-10 flex items-center border-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'>
+                                        <Link
+                                            to={`/course/edit/${course.id}`}
+                                            className='h-10 flex items-center border-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'
+                                        >
                                             <FaRegEdit />
-                                        </button>
+                                        </Link>
                                         <button className='h-10 flex items-center border-1 border-gray-500 text-gray-500 px-3 py-2 rounded-md hover:bg-gray-500 hover:text-white transition-colors'>
                                             <MdChecklist />
                                         </button>

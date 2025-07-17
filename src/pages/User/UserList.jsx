@@ -12,6 +12,7 @@ import {
   FaDownload,
   FaPrint,
 } from "react-icons/fa";
+import { deleteUserById, getAllUsers } from "../../services/userService";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -22,10 +23,9 @@ const UserList = () => {
   const [showHistory, setShowHistory] = useState(false);
   const [historyData, setHistoryData] = useState({});
 
-  const fetchUsers = () => {
-    fetch("https://684f8c28e7c42cfd179502d0.mockapi.io/api/user")
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
+  const fetchUsers = async () => {
+    const response = await getAllUsers();
+    if (response) setUsers(response);
   };
 
   useEffect(() => {
@@ -41,9 +41,7 @@ const UserList = () => {
   const handleBulkDelete = async () => {
     await Promise.all(
       selected.map((id) =>
-        fetch(`https://684f8c28e7c42cfd179502d0.mockapi.io/api/user/${id}`, {
-          method: "DELETE",
-        })
+        deleteUserById(id)
       )
     );
     toast.success("Deleted selected users");
@@ -91,11 +89,10 @@ const UserList = () => {
               onClick={handleBulkDelete}
               disabled={selected.length === 0}
               className={`flex items-center gap-2 px-4 py-2 rounded font-medium transition
-              ${
-                selected.length === 0
+              ${selected.length === 0
                   ? "bg-red-300 cursor-not-allowed text-white"
                   : "bg-red-600 hover:bg-red-700 text-white cursor-pointer"
-              }`}
+                }`}
             >
               <FaTrash /> Delete ({selected.length})
             </button>
@@ -143,12 +140,7 @@ const UserList = () => {
           selected={selected}
           onSelect={handleSelect}
           onDelete={async (id) => {
-            await fetch(
-              `https://684f8c28e7c42cfd179502d0.mockapi.io/api/user/${id}`,
-              {
-                method: "DELETE",
-              }
-            );
+            await deleteUserById(id);
             toast.success("Deleted user");
             fetchUsers();
           }}
@@ -176,11 +168,10 @@ const UserList = () => {
             <button
               key={i + 1}
               onClick={() => setCurrentPage(i + 1)}
-              className={`px-3 py-1 rounded border ${
-                currentPage === i + 1
-                  ? "bg-blue-600 text-white font-semibold"
-                  : "hover:bg-gray-100"
-              }`}
+              className={`px-3 py-1 rounded border ${currentPage === i + 1
+                ? "bg-blue-600 text-white font-semibold"
+                : "hover:bg-gray-100"
+                }`}
             >
               {i + 1}
             </button>
